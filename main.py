@@ -33,6 +33,12 @@ def main():
     for chapter in chapters:
         chapter_id = chapter["id"]
         chapter_name = chapter["name"]
+        output_pdf = os.path.join(pdf_dir, f"{chapter_name}.pdf")
+
+        # ✅ Verificar si ya existe el PDF
+        if os.path.exists(output_pdf):
+            print(f"⏩ Saltando capítulo {chapter_name}, ya descargado.")
+            continue
 
         resp = requests.get(CHAPTER_URL_TEMPLATE.format(chapter_id=chapter_id))
         resp.raise_for_status()
@@ -42,10 +48,8 @@ def main():
         print(f"⬇️ Descargando capítulo {chapter_name} ({len(image_urls)} páginas)")
         chapter_folder = os.path.join(images_dir, chapter_name)
 
-        # 🔑 Descargar y esperar a que TODAS las imágenes estén listas
         downloaded_files = downloader.download_chapter_images(image_urls, chapter_folder)
 
-        output_pdf = os.path.join(pdf_dir, f"{chapter_name}.pdf")
         pdf_generator.create_pdf_from_files(downloaded_files, output_pdf)
 
 if __name__ == "__main__":
