@@ -1,3 +1,5 @@
 requests
 fpdf2
 Pillow
+aiohttp
+
