@@ -8,27 +8,20 @@ La herramienta detecta automáticamente el nombre del manhwa desde la URL y crea
 
 ## 📂 Estructura del Proyecto
 ```
-manhwa_downloader/
-│── main.py # Script principal
-│── requirements.txt # Dependencias del proyecto
-│── README.md # Documentación
+manwha_scraper/
+│── api/
+│   ├── __init__.py
+│   └── chapters_api.py
 │
-├── api/
-│ ├── chapters_api.py # Obtiene la lista de capítulos
-│ └── images_api.py # Obtiene las imágenes de cada capítulo
+│── downloaders/
+│   ├── __init__.py
+│   ├── image_downloader.py
+│   └── pdf_generator.py
 │
-├── services/
-│ ├── downloader.py # Descarga y organiza imágenes
-│ └── pdf_generator.py # Genera PDFs a partir de imágenes
-│
-└── output/
-└── Jugad20_225_reso_10000_anos_despues13424/ # Carpeta dinámica del manhwa
-├── images/ # Imágenes por capítulo
-│ ├── 122/
-│ └── 121/
-└── pdfs/ # PDFs por capítulo
-├── 122.pdf
-└── 121.pdf
+│── main.py
+│── requirements.txt
+│── README.md
+│── output/  (generada automáticamente)
 ```
 ---
 
@@ -55,23 +48,22 @@ manhwa_downloader/
 Para usar el script con otro manhwa:
 
 1. Abre `main.py`.
-2. Modifica las URLs:
+2. Modifica la variable la variable slug 
 
 ```
-CHAPTERS_URL = "https://dashboard.olympusbiblioteca.com/api/series/<slug_del_manhwa>/chapters"
-IMAGES_URL = "https://olympusbiblioteca.com/api/capitulo/<slug_del_manhwa>"
+SLUG = "el-asesino-yu-ijin20250729-110824049"
+
+BASE_URL = f"https://dashboard.olympusbiblioteca.com/api/series/{SLUG}/chapters?page=1&direction=desc&type=comic"
+CHAPTER_URL_TEMPLATE = f"https://olympusbiblioteca.com/api/capitulo/{SLUG}/{{chapter_id}}?type=comic"
 ```
 Ejemplo:
 
 URL de capítulos:
 ```
-https://dashboard.olympusbiblioteca.com/api/series/nuevo-manhwa-slug/chapters
+
+https://dashboard.olympusbiblioteca.com/api/series/el-asesino-yu-ijin20250729-110824049/chapters?page=2&direction=desc&type=comic
 ```
-Código:
-```python
-CHAPTERS_URL = "https://dashboard.olympusbiblioteca.com/api/series/nuevo-manhwa-slug/chapters"
-IMAGES_URL = "https://olympusbiblioteca.com/api/capitulo/nuevo-manhwa-slug"
-```
+
 El script creará automáticamente la estructura:
 ```
 output/Nuevo_manhwa_slug/
