@@ -8,27 +8,20 @@ La herramienta detecta automáticamente el nombre del manhwa desde la URL y crea
 
 ## 📂 Estructura del Proyecto
 ```
-manhwa_downloader/
-│── main.py # Script principal
-│── requirements.txt # Dependencias del proyecto
-│── README.md # Documentación
+manwha_scraper/
+│── api/
+│   ├── __init__.py
+│   └── chapters_api.py
 │
-├── api/
-│ ├── chapters_api.py # Obtiene la lista de capítulos
-│ └── images_api.py # Obtiene las imágenes de cada capítulo
+│── downloaders/
+│   ├── __init__.py
+│   ├── image_downloader.py
+│   └── pdf_generator.py
 │
-├── services/
-│ ├── downloader.py # Descarga y organiza imágenes
-│ └── pdf_generator.py # Genera PDFs a partir de imágenes
-│
-└── output/
-└── Jugad20_225_reso_10000_anos_despues13424/ # Carpeta dinámica del manhwa
-├── images/ # Imágenes por capítulo
-│ ├── 122/
-│ └── 121/
-└── pdfs/ # PDFs por capítulo
-├── 122.pdf
-└── 121.pdf
+│── main.py
+│── requirements.txt
+│── README.md
+│── output/  (generada automáticamente)
 ```
 ---
 
