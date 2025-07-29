@@ -5,8 +5,10 @@ from downloaders.image_downloader import ImageDownloader
 from downloaders.pdf_generator import PDFGenerator
 from urllib.parse import urlparse
 
-BASE_URL = "https://dashboard.olympusbiblioteca.com/api/series/jugad20-225-reso-10000-anos-despues13424/chapters?page=1&direction=desc&type=comic"
-CHAPTER_URL_TEMPLATE = "https://olympusbiblioteca.com/api/capitulo/jugad20-225-reso-10000-anos-despues13424/{chapter_id}?type=comic"
+SLUG = "el-asesino-yu-ijin20250729-110824049"
+
+BASE_URL = f"https://dashboard.olympusbiblioteca.com/api/series/{SLUG}/chapters?page=1&direction=desc&type=comic"
+CHAPTER_URL_TEMPLATE = f"https://olympusbiblioteca.com/api/capitulo/{SLUG}/{{chapter_id}}?type=comic"
 
 def extract_manwha_name(url):
     parts = urlparse(url).path.split('/')
