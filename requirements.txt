@@ -1,4 +1,7 @@
 requests
+tqdm
+pytest
+requests
 fpdf2
 Pillow
 aiohttp
